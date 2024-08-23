@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UA Library</title>
+    <link rel="icon" type="image/png" href="https://iili.io/dW0j1Re.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>UA Library Documentation</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#setup">Setup</a></li>
+                    <li><a href="#database">Database</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <section id="introduction" class="doc-section">
+                <h2>Introduction</h2>
+                <p>Welcome to the UA Library documentation. This project is designed to help you understand the basics of our system.</p>
+                <a href="#database">Database</a>
+                <a href="#meme">Memes (API)</a>
+                <a href="#discord-bot">Discord Bot</a>
+                <a href="#neoinfo">NeoInfo</a>
+                <a href="#uuid">UUID (API)</a>
+            </section>
+
+            <section id="setup" class="doc-section">
+                <h2>Setup</h2>
+                <p>To Setup UA Library Do This</p>
+                <ol>
+                    <li>Download Using Pypi (PIP) Or Direct From Github</li>
+                    <li>Install Using <code>pip install ua_lib</code>.</li>
+                    <li>Or <code>git clone https://github.com/jamielocal/UALib | cd UALib | python3 -m pip install -U .</code> To install From Github</li>
+                </ol>
+            </section>
+
+            <section id="database" class="doc-section">
+				<h2>Database</h2>
+				<ul>
+					<li>
+						<strong>UADatabase('database.ua')</strong>
+						<p>Opens a Line To That Database File. Followed By <code>connect_db</code>.</p>
+					</li>
+					<li>
+						<strong>connect_db()</strong>
+						<p>Connects The Database From <code>UADatabase</code>. Disconnection Needed At the End of the Program.</p>
+					</li>
+					<li>
+						<strong>disconnect_db()</strong>
+						<p>Disconnects The Database From <code>UADatabase</code>.</p>
+					</li>
+					<li>
+						<strong>add_entry('Value', {'value': 'value'})</strong>
+						<p>Creates a Value in the Connected Database!</p>
+					</li>
+					<li>
+						<strong>get_entry('Value')</strong>
+						<p>Gets an Entry Based Off of First Value (Key).</p>
+					</li>
+					<li>
+						<strong>delete_entry('Value')</strong>
+						<p>Deletes an Entry Based off of First Value (key).</p>
+					</li>
+					<li>
+						<strong>update_entry('Value', {'value': 'Name'})</strong>
+						<p>Updates a Value in the Connected Database.</p>
+					</li>
+					<li>
+						<strong>get_all()</strong>
+						<p>Gets all Database Entries.</p>
+					</li>
+					<li>
+						<strong>create_database('database.hdb')</strong>
+						<p>Creates a Database (Either .hdb Or .ua).</p>
+					</li>
+					<li>
+						<strong>convert_sqlite('sqlitedatabase.db', 'converted.ua')</strong>
+						<p>Converts a SQLITE3 Database To a UADatabase.</p>
+					</li>
+				</ul>
+				<p>Examples can be found at <a href="https://jamielocal.github.io/examples/db" target="_blank">https://jamielocal.github.io/examples/db</a></p>
+			</section>
+			<section id="meme" class="doc-section">
+				<h2>Meme (API Function)</h2>
+				<ul>
+					<li>
+						<strong>r_memes()</strong>
+						<p>Returns a Picture From Reddit. (From <code>r/memes</code>)</p>
+					</li>
+					<li>
+						<strong>r_nsfw_meme()</strong>
+						<p>Returns a Picture From Reddit. (From <code>r/nsfw_meme</code>)</p>
+					</li>
+					<li>
+						<strong>r_dankmemes()</strong>
+						<p>Returns a Picture From Reddit. (From <code>r/dankmemes</code>)</p>
+					</li>
+				</ul>
+			</section>
+			<section id="discord-bot" class="doc-section">
+				<h2>Discord Bot (dbot)</h2>
+				<ul>
+					<li>
+						<strong>token('Token_Here')</strong>
+						<p>Use this to Run the Bot. <br> Only Function.</p>
+					</li>
+				</ul>
+			</section>
+			<section id="neoinfo" class="doc-section">
+				<h2>NeoInfo</h2>
+				<ul>
+					<li>
+						<strong>neofetch()</strong>
+						<p>Fetch a Bunch Of User Computer Data. <br> Boot Time, Memory Details, CPU Info, System Info.</p>
+						<p>Credits: 24_saurabh sharma on Stackoverflow, Thank You!</p>
+					</li>
+				</ul>
+			</section>
+			<section id="uuid" class="doc-section">
+				<h2>UUID (API Function)</h2>
+				<ul>
+					<li>
+						<strong>v1()</strong>
+						<p>Gets a V1 UUID From uuidtools.</p>
+					</li>
+					<li>
+						<strong>v4()</strong>
+						<p>Gets a V4 UUID From uuidtools.</p>
+					</li>
+				</ul>
+				<p>Examples can be found at <a href="https://jamielocal.github.io/examples/api" target="_blank">https://jamielocal.github.io/examples/api</a></p>
+			</section>
+
+
+
+
+
+        </main>
+
+        <footer>
+            <p>© 2024 jamie.local | jamie.local@proton.me</p>
+        </footer>
+    </div>
+</body>
+</html>

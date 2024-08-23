@@ -1,0 +1,207 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #2c2f33;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #7289da;
+}
+
+/* Navigation Styles */
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #7289da;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Section */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Project Section Styles */
+.project {
+    background-color: #23272a;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.project h2 {
+    font-size: 1.8em;
+    color: #7289da;
+    margin-bottom: 10px;
+}
+
+.project p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.project a {
+    color: #ffffff;
+    background-color: #7289da;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+.project a:hover {
+    background-color: #5b6eae;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+footer p {
+    font-size: 1em;
+    color: #99aab5;
+}
+
+/* Embed Container for Example Page */
+.embed-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    background-color: #2c2f33;
+    border: 1px solid #7289da;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.embed-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+/* Documentation Section Styles */
+.doc-section {
+    background-color: #23272a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.doc-section h2 {
+    font-size: 1.8em;
+    color: #7289da;
+    margin-bottom: 15px;
+}
+
+.doc-section p,
+.doc-section ol,
+.doc-section ul {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.doc-section code {
+    background-color: #2c2f33;
+    color: #f8f8f2;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* List Styles */
+.doc-section ol,
+/* Database Section Styles */
+.doc-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.doc-section ul li {
+    margin-bottom: 15px;
+}
+
+.doc-section ul li strong {
+    color: #7289da;
+    font-size: 1.1em;
+}
+
+.doc-section ul li p {
+    margin: 5px 0 0 20px;
+    font-size: 1em;
+    color: #b9bbbe;
+}
+
+
+.doc-section li {
+    margin-bottom: 10px;
+}
+.coming-soon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.coming-soon-content {
+    max-width: 600px;
+    padding: 20px;
+    background-color: #23272a; /* Slightly lighter background */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.coming-soon-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.coming-soon-content p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+a {
+    color: #7289da;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
