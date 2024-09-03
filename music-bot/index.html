@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Discord Bot - jqm1e.xyz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="https://jqm1e.xyz">jqm1e.xyz</a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="https://jqm1e.xyz">Home</a></li>
+                    <li><a href="https://dsc.gg/syxsupport">Discord</a></li>
+                    <li><a href="https://jqm1e.xyz/docs/">Docs</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div id="markdown-content">
+            </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script> 
+    <script>
+        fetch('https://raw.githubusercontent.com/jamielocal/Music-Bot/main/README.md') 
+            .then(response => response.text())
+            .then(markdown => {
+                const markdownContent = document.getElementById('markdown-content');
+                markdownContent.innerHTML = marked.parse(markdown); 
+            })
+            .catch(error => console.error('Error fetching Markdown:', error));
+    </script>
+
+</body>
+</html>

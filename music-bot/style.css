@@ -1,0 +1,111 @@
+body {
+    font-family: sans-serif;
+    background-image: url('https://i.ibb.co/JswpxF3/drawing-ref.jpg'); /* Use your image */
+    background-size: cover; /* Cover the entire viewport */
+    background-position: center; /* Center the image */
+    color: #e0e0e0; /* Lighter gray for text */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+
+header {
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for header */
+    padding: 10px 20px; /* Add padding */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo a {
+    color: #e0e0e0; /* Light gray for logo text */
+    font-size: 1.2em;
+    text-decoration: none;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav li {
+    margin-left: 20px;
+}
+
+header nav a {
+    color: #007bff; /* Darker blue for nav links */
+    text-decoration: none;
+}
+
+main {
+    flex: 1; 
+    background-color: rgba(0, 0, 0, 0.7); /* Darker, more transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto; 
+}
+
+#markdown-content {
+    line-height: 1.6;
+}
+
+#markdown-content h1,
+#markdown-content h2,
+#markdown-content h3 {
+    color: #007bff; /* Darker blue for headings */
+}
+
+#markdown-content a {
+    color: #007bff; /* Darker blue for links */
+}
+
+#markdown-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto; 
+}
+
+#markdown-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#markdown-content th,
+#markdown-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+#markdown-content th {
+    background-color: rgba(0, 0, 0, 0.3); /* Darker background for table headers */
+}
+
+#markdown-content code {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter background for code */
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+
+#markdown-content pre {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter background for code blocks */
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto; 
+}
+
+#markdown-content blockquote {
+    border-left: 4px solid #007bff; /* Darker blue for blockquote border */
+    padding-left: 10px;
+    margin-left: 0;
+}
