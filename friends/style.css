@@ -1,0 +1,699 @@
+/* --- Modrinth-Inspired Dark Mode Variables --- */
+:root {
+    /* --- Backgrounds --- */
+    --mod-bg-primary: #000000;
+    /* AMOLED Black */
+    --mod-bg-secondary: #2a2a36;
+    /* Slightly lighter grey for cards/content (Keep this for contrast) */
+    --mod-bg-tertiary: #3a3a4a;
+    /* Hover/active states */
+    --mod-code-bg: var(--mod-bg-secondary);
+    /* Changed: Use secondary bg for code blocks for contrast */
+
+    /* --- Text --- */
+    --mod-text-primary: #e0e1e6;
+    /* Main text color */
+    --mod-text-secondary: #a0a1a6;
+    /* Dimmer text, labels */
+    --mod-text-heading: #ffffff;
+    /* Headings */
+
+    /* --- Borders --- */
+    --mod-border-color: #3c3c4a;
+    /* Subtle borders */
+
+    /* --- Accents & Actions --- */
+    --mod-accent-primary: #7e57c2;
+    /* CHANGED: Purple for primary actions */
+    --mod-accent-primary-hover: #9575cd;
+    /* CHANGED: Lighter purple hover */
+    --mod-accent-secondary: #4a4a5a;
+    /* Grey for secondary buttons */
+    --mod-accent-secondary-hover: #5a5a6a;
+    --mod-link-color: #58a6ff;
+    /* Blue for links */
+    --mod-link-hover-color: #79c0ff;
+
+    /* --- Tags --- */
+    --mod-tag-bg: #3f3f4f;
+    --mod-tag-text: #c0c1c6;
+    --mod-accent-primary: #7e57c2;
+    --mod-accent-primary-hover: #9575cd;
+    --mod-neon-effect: rgba(126, 87, 194, 0.4);
+    --mod-gradient: linear-gradient(135deg, #7e57c2 0%, #26C6DA 100%);
+
+}
+
+.features-list-mod li,
+.prose li {
+    position: relative;
+    padding-left: 20px;
+    transition: transform 0.3s ease;
+}
+
+.features-list-mod li:hover {
+    transform: translateX(10px);
+}
+
+.features-list-mod li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--mod-accent-primary);
+}
+
+/* Smooth Transitions */
+*,
+*::before,
+*::after {
+    transition: all 0.3s ease;
+}
+
+/* --- Global Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: var(--mod-bg-primary);
+    color: var(--mod-text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--mod-link-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--mod-link-hover-color);
+    text-decoration: underline;
+}
+
+/* --- Page Structure --- */
+.page-container-mod {
+    width: 100%;
+    max-width: 1280px;
+    /* Max width like Modrinth */
+    margin: 0 auto;
+    padding: 0 1rem;
+    /* Padding on sides */
+}
+
+/* --- Header --- */
+.project-header-mod {
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+.project-header-mod .header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.project-header-mod .project-icon {
+    /* Optional icon styling */
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+
+.project-header-mod h1 {
+    color: var(--mod-text-heading);
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.1rem;
+    /* Reduced margin */
+}
+
+.project-header-mod .author-info {
+    font-size: 0.95rem;
+    color: var(--mod-text-secondary);
+}
+
+.project-header-mod .author-info a {
+    color: var(--mod-text-secondary);
+    font-weight: 600;
+}
+
+.project-header-mod .author-info a:hover {
+    color: var(--mod-link-hover-color);
+}
+
+.project-header-mod .summary {
+    font-size: 1.1rem;
+    color: var(--mod-text-primary);
+    margin-top: 0.5rem;
+}
+
+/* --- Content Layout (Main + Sidebar) --- */
+.content-wrapper-mod {
+    display: flex;
+    gap: 1.5rem;
+    /* Space between main and sidebar */
+    flex-wrap: wrap;
+    /* Allow sidebar to wrap */
+}
+
+.main-content-mod {
+    flex: 3 1 600px;
+    /* Main content takes more space */
+    background-color: var(--mod-bg-secondary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid var(--mod-border-color);
+}
+
+.sidebar-mod {
+    flex: 1 1 300px;
+    /* Sidebar takes less space */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Space between sidebar sections */
+}
+
+/* --- Main Content Sections --- */
+.main-content-mod section {
+    margin-bottom: 2rem;
+}
+
+.main-content-mod section:last-child {
+    margin-bottom: 0;
+}
+
+.main-content-mod h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--mod-text-heading);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+/* --- Prose/Description Styling --- */
+.prose p {
+    margin-bottom: 1em;
+}
+
+.prose ul,
+.prose ol {
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+}
+
+.prose li {
+    margin-bottom: 0.5em;
+}
+
+.prose code {
+    background-color: var(--mod-code-bg);
+    /* ... other code styles ... */
+}
+
+.prose pre {
+    background-color: var(--mod-code-bg);
+    /* ... other pre styles ... */
+}
+
+.prose pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+.prose strong {
+    font-weight: 700;
+    color: var(--mod-text-heading);
+}
+
+/* --- Features List --- */
+.features-list-mod {
+    list-style: disc;
+    /* Or use custom icons */
+    padding-left: 1.5em;
+}
+
+.features-list-mod li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Gallery --- */
+.gallery-grid-mod {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.gallery-grid-mod img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--mod-border-color);
+    object-fit: cover;
+}
+
+/* --- Sidebar Sections --- */
+.sidebar-mod .sidebar-section {
+    background-color: var(--mod-bg-secondary);
+    border-radius: 8px;
+    padding: 1.25rem;
+    border: 1px solid var(--mod-border-color);
+}
+
+.sidebar-mod h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--mod-text-heading);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+/* --- Action Buttons --- */
+.sidebar-section.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+/* Icon Integration */
+.button i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.sidebar-section .button {
+    display: flex;
+    /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+    /* Center text */
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+    /* Make buttons full width of sidebar section */
+    text-decoration: none;
+    /* Remove underline from button links */
+}
+
+.sidebar-section .button:hover {
+    text-decoration: none;
+    /* Keep underline off on hover */
+    transform: translateY(-1px);
+}
+
+.sidebar-section .button:active {
+    transform: translateY(0px);
+}
+
+.button.primary-action {
+    background-color: var(--mod-accent-primary);
+    /* Uses the purple variable now */
+    color: #fff;
+    /* White text still works well on this purple */
+}
+
+.button.primary-action:hover {
+    background-color: var(--mod-accent-primary-hover);
+    /* Uses the purple hover variable */
+    color: #fff;
+}
+
+/* NEW: Styles for the top row (Logo + Big Title) */
+.main-title-row {
+    display: flex;
+    align-items: center;
+    /* Vertically align logo and title */
+    gap: 1.5rem;
+    /* Space between logo and title */
+    margin-bottom: 1.5rem;
+    /* Space below this row */
+}
+
+.main-logo {
+    width: 128px;
+    height: 128px;
+    object-fit: contain;
+    /* Use 'contain' to fit logo without cropping */
+    border-radius: 8px;
+    /* Optional: keep or remove rounded corners */
+    flex-shrink: 0;
+    /* Prevent logo from shrinking */
+    /* border: 1px solid var(--mod-border-color); */
+    /* REMOVED this line */
+}
+
+.main-title {
+    /* Styles for the new H2 title */
+    font-size: 3rem;
+    /* Make it significantly larger */
+    font-weight: 700;
+    /* Bold */
+    color: var(--mod-text-heading);
+    /* White */
+    margin: 0;
+    /* Remove default margins */
+    line-height: 1.1;
+    /* Adjust line height */
+}
+
+/* END NEW */
+
+.button.secondary-action {
+    background-color: var(--mod-accent-secondary);
+    color: var(--mod-text-primary);
+}
+
+.button.secondary-action:hover {
+    background-color: var(--mod-accent-secondary-hover);
+    color: var(--mod-text-primary);
+}
+
+
+/* --- Metadata Styling --- */
+.sidebar-section.metadata .meta-item {
+    display: flex;
+    justify-content: space-between;
+    /* Align label left, value right */
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px dashed var(--mod-border-color);
+    /* Dashed separator */
+}
+
+.sidebar-section.metadata .meta-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.meta-label {
+    color: var(--mod-text-secondary);
+    font-weight: 600;
+}
+
+.meta-value {
+    color: var(--mod-text-primary);
+    text-align: right;
+}
+
+.meta-value a {
+    color: var(--mod-link-color);
+    /* Ensure links in metadata are styled */
+}
+
+.meta-value a:hover {
+    color: var(--mod-link-hover-color);
+}
+
+
+/* --- Tech Tags Styling --- */
+.tech-tags-mod {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tags-mod span {
+    background-color: var(--mod-tag-bg);
+    color: var(--mod-tag-text);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* --- Dependencies List (Optional) --- */
+.sidebar-section.dependencies ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.sidebar-section.dependencies li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    color: var(--mod-text-secondary);
+}
+
+.sidebar-section.dependencies li a {
+    color: var(--mod-link-color);
+    font-weight: 600;
+}
+
+
+/* --- Footer --- */
+.footer-mod {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+    color: var(--mod-text-secondary);
+    font-size: 0.85rem;
+    border-top: 1px solid var(--mod-border-color);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+
+    /* Stack sidebar below main content */
+    .content-wrapper-mod {
+        flex-direction: column;
+    }
+
+    .main-content-mod,
+    .sidebar-mod {
+        flex-basis: auto;
+        /* Allow them to take full width */
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* Adjust padding and fonts for smaller screens */
+    html {
+        font-size: 15px;
+    }
+
+    .page-container-mod {
+        padding: 0 0.5rem;
+    }
+
+    .project-header-mod h1 {
+        font-size: 1.8rem;
+    }
+
+    .main-content-mod,
+    .sidebar-mod .sidebar-section {
+        padding: 1rem;
+    }
+
+    .main-content-mod h2 {
+        font-size: 1.4rem;
+    }
+
+    .sidebar-mod h3 {
+        font-size: 1rem;
+    }
+
+    .gallery-grid-mod {
+        grid-template-columns: 1fr;
+        /* Stack gallery images */
+    }
+}
+
+/* --- FAQ Link Specific Styling (Example) --- */
+
+
+
+.modal {
+    display: none;
+    /* <<<< CRITICAL: MUST be none */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* NO display:flex or align-items or justify-content HERE */
+}
+
+/* This rule makes it visible AND centers it when the 'show' class is added */
+.modal.show {
+    display: flex;
+    /* <<<< CRITICAL: Flex display is ONLY in the .show rule */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    /* ...styles for the box itself (background, padding, border, width, etc)... */
+    background-color: var(--mod-bg-secondary);
+    padding: 25px 30px;
+    border: 1px solid var(--mod-border-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(25px);
+    background: rgba(42, 42, 54, 0.95) !important;
+    border: 1px solid rgba(126, 87, 194, 0.5);
+}
+
+.gallery-grid-mod img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid-mod img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 25px var(--mod-neon-effect);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--mod-text-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: none;
+    /* Remove potential border from main h2 style */
+    padding: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1;
+    color: var(--mod-text-secondary);
+    cursor: pointer;
+    padding: 0 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: var(--mod-text-primary);
+    text-decoration: none;
+    outline: none;
+}
+
+.modal-body {
+    overflow-y: auto;
+    /* Enable scrolling for FAQ content if it overflows */
+    padding-right: 10px;
+    /* Add padding for scrollbar */
+}
+
+/* Styling for individual FAQ items */
+.faq-item {
+    margin-bottom: 1.75rem;
+}
+
+.faq-item:last-child {
+    margin-bottom: 0.5rem;
+    /* Reduce margin on last item */
+}
+
+.faq-question {
+    font-weight: 700;
+    color: var(--mod-text-heading);
+    margin-bottom: 0.6rem;
+    font-size: 1.1rem;
+}
+
+.faq-answer {
+    color: var(--mod-text-primary);
+    padding-left: 1rem;
+    border-left: 3px solid var(--mod-accent-primary);
+    /* Accent line */
+    line-height: 1.7;
+    font-size: 0.95rem;
+}
+
+.faq-answer p {
+    /* Ensure paragraphs within answer have margin */
+    margin-bottom: 0.8rem;
+}
+
+.faq-answer p:last-child {
+    margin-bottom: 0;
+}
+
+.faq-answer code {
+    background-color: var(--mod-code-bg);
+    color: var(--mod-text-primary);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.faq-answer kbd {
+    /* Style keyboard keys */
+    background-color: var(--mod-bg-tertiary);
+    border: 1px solid var(--mod-border-color);
+    border-radius: 3px;
+    padding: 0.1em 0.5em;
+    font-family: inherit;
+    font-size: 0.9em;
+    box-shadow: 1px 1px 0px var(--mod-bg-primary);
+    margin: 0 0.1em;
+}
+
+.faq-answer a {
+    color: var(--mod-link-color);
+    /* Ensure links inherit correctly */
+}
+
+.faq-answer a:hover {
+    color: var(--mod-link-hover-color);
+}
