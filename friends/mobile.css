@@ -1,0 +1,616 @@
+/* --- Modrinth-Inspired Dark Mode Variables --- */
+:root {
+    /* --- Backgrounds --- */
+    --mod-bg-primary: #000000;
+    /* AMOLED Black */
+    --mod-bg-secondary: #2a2a36;
+    --mod-bg-tertiary: #3a3a4a;
+    --mod-code-bg: var(--mod-bg-secondary);
+
+    /* --- Text --- */
+    --mod-text-primary: #e0e1e6;
+    --mod-text-secondary: #a0a1a6;
+    --mod-text-heading: #ffffff;
+
+    /* --- Borders --- */
+    --mod-border-color: #3c3c4a;
+
+    /* --- Accents & Actions --- */
+    --mod-accent-primary: #7e57c2;
+    /* Purple */
+    --mod-accent-primary-hover: #9575cd;
+    --mod-accent-secondary: #4a4a5a;
+    /* Grey */
+    --mod-accent-secondary-hover: #5a5a6a;
+    --mod-link-color: #58a6ff;
+    /* Blue */
+    --mod-link-hover-color: #79c0ff;
+
+    /* --- Tags --- */
+    --mod-tag-bg: #3f3f4f;
+    --mod-tag-text: #c0c1c6;
+    --mod-neon-effect: rgba(126, 87, 194, 0.4);
+    --mod-gradient: linear-gradient(135deg, #7e57c2 0%, #26C6DA 100%);
+}
+
+/* Smooth Transitions */
+*,
+*::before,
+*::after {
+    transition: all 0.3s ease;
+}
+
+/* --- Global Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 15px;
+    /* Mobile-friendly base font size */
+}
+
+body {
+    background-color: var(--mod-bg-primary);
+    color: var(--mod-text-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: var(--mod-link-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--mod-link-hover-color);
+    text-decoration: underline;
+}
+
+/* --- Page Structure --- */
+.page-container-mod {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+    /* Reduced padding for mobile */
+}
+
+/* --- Header --- */
+.project-header-mod {
+    padding: 1rem 0;
+    /* Reduced padding */
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+.project-header-mod .header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-direction: column;
+    /* Stack logo/title row */
+    text-align: center;
+}
+
+/* NEW: Styles for the top row (Logo + Big Title) */
+.main-title-row {
+    display: flex;
+    flex-direction: column;
+    /* Stack logo and title */
+    align-items: center;
+    /* Center items */
+    gap: 0.5rem;
+    /* Reduced gap */
+    margin-bottom: 0.5rem;
+    /* Reduced margin */
+    width: 100%;
+}
+
+.main-logo {
+    width: 80px;
+    /* Smaller logo for mobile */
+    height: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.main-title {
+    font-size: 2.2rem;
+    /* Smaller title for mobile */
+    font-weight: 700;
+    color: var(--mod-text-heading);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.project-header-mod .author-info {
+    font-size: 0.9rem;
+    /* Slightly smaller */
+    color: var(--mod-text-secondary);
+    text-align: center;
+    /* Center author info */
+    margin-top: 0.5rem;
+}
+
+.project-header-mod .author-info a {
+    color: var(--mod-text-secondary);
+    font-weight: 600;
+}
+
+.project-header-mod .author-info a:hover {
+    color: var(--mod-link-hover-color);
+}
+
+/* --- Content Layout (Stacking by Default) --- */
+.content-wrapper-mod {
+    display: flex;
+    flex-direction: column;
+    /* Stack main content and sidebar */
+    gap: 1rem;
+    /* Reduced gap */
+}
+
+.main-content-mod {
+    background-color: var(--mod-bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    /* Reduced padding */
+    border: 1px solid var(--mod-border-color);
+    order: 1;
+    /* Ensure main content comes first visually */
+}
+
+.sidebar-mod {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* Reduced gap */
+    order: 2;
+    /* Ensure sidebar comes after main content */
+}
+
+/* --- Main Content Sections --- */
+.main-content-mod section {
+    margin-bottom: 1.5rem;
+    /* Reduced margin */
+}
+
+.main-content-mod section:last-child {
+    margin-bottom: 0;
+}
+
+.main-content-mod h2 {
+    font-size: 1.4rem;
+    /* Smaller heading */
+    font-weight: 700;
+    color: var(--mod-text-heading);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+/* --- Prose/Description Styling --- */
+.prose p {
+    margin-bottom: 1em;
+}
+
+.prose ul,
+.prose ol {
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+    /* Keep indentation */
+}
+
+.prose li {
+    margin-bottom: 0.5em;
+    position: relative;
+    padding-left: 15px;
+    /* Space for bullet */
+}
+
+/* Style list bullets */
+.features-list-mod li::before,
+.prose li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--mod-accent-primary);
+    /* display: none; Remove custom bullet for default */
+}
+
+.features-list-mod,
+.prose ul {
+    list-style: none;
+    /* Remove default browser bullet */
+    padding-left: 0;
+    /* Remove default padding */
+}
+
+.features-list-mod li,
+.prose li {
+    padding-left: 20px;
+    /* Add padding for custom bullet */
+    position: relative;
+    margin-bottom: 0.6rem;
+}
+
+
+.prose code,
+.faq-answer code {
+    background-color: var(--mod-code-bg);
+    color: var(--mod-text-primary);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.prose pre {
+    background-color: var(--mod-code-bg);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    /* Allow horizontal scroll for code blocks */
+}
+
+.prose pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.9em;
+}
+
+.prose strong {
+    font-weight: 700;
+    color: var(--mod-text-heading);
+}
+
+/* --- Features List --- */
+.features-list-mod li {
+    margin-bottom: 0.5rem;
+}
+
+/* --- Gallery --- */
+.gallery-grid-mod {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Stack gallery images */
+    gap: 1rem;
+}
+
+.gallery-grid-mod img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--mod-border-color);
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-grid-mod img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px var(--mod-neon-effect);
+    /* Slightly smaller shadow */
+}
+
+
+/* --- Sidebar Sections --- */
+.sidebar-mod .sidebar-section {
+    background-color: var(--mod-bg-secondary);
+    border-radius: 8px;
+    padding: 1rem;
+    /* Reduced padding */
+    border: 1px solid var(--mod-border-color);
+}
+
+.sidebar-mod h3 {
+    font-size: 1.1rem;
+    /* Keep sidebar headings slightly larger */
+    font-weight: 700;
+    color: var(--mod-text-heading);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+/* --- Action Buttons --- */
+.sidebar-section.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.sidebar-section .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    /* Slightly larger padding for easier tapping */
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    width: 100%;
+    text-decoration: none;
+}
+
+.sidebar-section .button i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+
+.sidebar-section .button:hover {
+    text-decoration: none;
+    /* No transform on hover for mobile, can feel laggy */
+}
+
+.sidebar-section .button:active {
+    transform: translateY(1px);
+    /* Subtle press effect */
+}
+
+.button.primary-action {
+    background-color: var(--mod-accent-primary);
+    color: #fff;
+}
+
+.button.primary-action:hover {
+    /* Use :active for mobile feedback */
+    background-color: var(--mod-accent-primary);
+}
+
+.button.primary-action:active {
+    background-color: var(--mod-accent-primary-hover);
+}
+
+
+.button.secondary-action {
+    background-color: var(--mod-accent-secondary);
+    color: var(--mod-text-primary);
+}
+
+.button.secondary-action:hover {
+    background-color: var(--mod-accent-secondary);
+}
+
+.button.secondary-action:active {
+    background-color: var(--mod-accent-secondary-hover);
+}
+
+
+/* --- Metadata Styling --- */
+.sidebar-section.metadata .meta-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px dashed var(--mod-border-color);
+}
+
+.sidebar-section.metadata .meta-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.meta-label {
+    color: var(--mod-text-secondary);
+    font-weight: 600;
+    padding-right: 10px;
+    /* Ensure space between label and value */
+    flex-shrink: 0;
+    /* Prevent label from shrinking too much */
+}
+
+.meta-value {
+    color: var(--mod-text-primary);
+    text-align: right;
+    word-break: break-word;
+    /* Prevent long values overflowing */
+}
+
+.meta-value a {
+    color: var(--mod-link-color);
+}
+
+.meta-value a:hover {
+    color: var(--mod-link-hover-color);
+}
+
+/* --- Footer --- */
+.footer-mod {
+    text-align: center;
+    padding: 1rem;
+    /* Reduced padding */
+    margin-top: 1.5rem;
+    color: var(--mod-text-secondary);
+    font-size: 0.8rem;
+    /* Smaller footer text */
+    border-top: 1px solid var(--mod-border-color);
+}
+
+/* --- FAQ Modal Styles --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Darker overlay */
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    /* Vertically center */
+    justify-content: center;
+    /* Horizontally center */
+}
+
+.modal-content {
+    background-color: var(--mod-bg-secondary);
+    padding: 20px 25px;
+    /* Adjust padding */
+    border: 1px solid var(--mod-border-color);
+    border-radius: 8px;
+    width: 90%;
+    /* Use percentage width */
+    max-width: 500px;
+    /* Max width for larger mobiles/tablets */
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    max-height: 80vh;
+    /* Limit height */
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+    /* Less blur */
+    background: rgba(42, 42, 54, 0.97) !important;
+    /* Slightly less transparent */
+    border: 1px solid rgba(126, 87, 194, 0.4);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.8rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--mod-border-color);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--mod-text-heading);
+    font-size: 1.3rem;
+    /* Slightly smaller modal title */
+    font-weight: 700;
+    border: none;
+    padding: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    /* Slightly smaller close button */
+    font-weight: bold;
+    line-height: 1;
+    color: var(--mod-text-secondary);
+    cursor: pointer;
+    padding: 0 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: var(--mod-text-primary);
+    text-decoration: none;
+    outline: none;
+}
+
+.modal-body {
+    overflow-y: auto;
+    /* Enable scrolling */
+    padding-right: 5px;
+    /* Space for scrollbar */
+    flex-grow: 1;
+    /* Allow body to take up available space */
+}
+
+/* Styling for individual FAQ items */
+.faq-item {
+    margin-bottom: 1.5rem;
+}
+
+.faq-item:last-child {
+    margin-bottom: 0.5rem;
+}
+
+.faq-question {
+    font-weight: 700;
+    color: var(--mod-text-heading);
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    /* Slightly smaller */
+}
+
+.faq-answer {
+    color: var(--mod-text-primary);
+    padding-left: 0.8rem;
+    border-left: 3px solid var(--mod-accent-primary);
+    line-height: 1.6;
+    font-size: 0.9rem;
+    /* Smaller answer text */
+}
+
+.faq-answer ul {
+    list-style: disc;
+    /* Use default bullets inside FAQ */
+    padding-left: 20px;
+    /* Indent nested list */
+    margin-top: 0.5rem;
+}
+
+.faq-answer li {
+    padding-left: 0;
+    /* Reset padding from main lists */
+    margin-bottom: 0.3rem;
+}
+
+.faq-answer li::before {
+    display: none;
+    /* Hide custom bullet inside FAQ */
+}
+
+
+.faq-answer p {
+    margin-bottom: 0.8rem;
+}
+
+.faq-answer p:last-child {
+    margin-bottom: 0;
+}
+
+
+.faq-answer kbd {
+    background-color: var(--mod-bg-tertiary);
+    border: 1px solid var(--mod-border-color);
+    border-radius: 3px;
+    padding: 0.1em 0.5em;
+    font-family: inherit;
+    font-size: 0.9em;
+    box-shadow: 1px 1px 0px var(--mod-bg-primary);
+    margin: 0 0.1em;
+    display: inline-block;
+    /* Prevent wrapping */
+}
+
+.faq-answer a {
+    color: var(--mod-link-color);
+}
+
+.faq-answer a:hover {
+    color: var(--mod-link-hover-color);
+}
+
+/* --- END FAQ --- */

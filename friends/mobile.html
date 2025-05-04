@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerTrims - Java Plugin (Mobile)</title>
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="page-container-mod">
+
+        <header class="project-header-mod">
+            <div class="header-content">
+                <div>
+                    <div class="main-title-row">
+                        <img src="img/minecraft_title.png" alt="BetterTrims Logo" class="main-logo">
+                        <h2 class="main-title">PowerTrims</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="author-info">By <a href="https://discord.com/users/717766973970186321">_divi._</a></div>
+        </header>
+        <div class="content-wrapper-mod">
+
+            <main class="main-content-mod">
+                <section id="description">
+                    <h2>More Info</h2>
+                    <div class="prose">
+                        <p>PowerTrims is a Lightweight mod to Add Trim Effects, to each and every Trim!</p>
+                        <p>Some Are:</p>
+                        <ul>
+                            <li><strong>Wild Trim |</strong> You get a Fun, and Unique, Balanced Grapple effect!</li>
+                            <li><strong>Slience Trim |</strong> You get Strength 3 for as long as you have that set on
+                            </li>
+                            <li><strong>And Much More! |</strong> We are Working on New Features on the Daily!</li>
+                        </ul>
+                        <p>Message me For Any more Questions!</p>
+                    </div>
+                </section>
+
+                <section id="features">
+                    <h2>Features</h2>
+                    <ul class="features-list-mod">
+                        <li>Super Lightweight And Fast</li>
+                        <li>Supports, Bukkit, Spigot, and Paper!</li>
+                        <li>Tons of Trim Effects, and working on tons more to add!</li>
+                        <li>Works on Any Server Version 1.21+</li>
+                        <li>Crossplay Support</li>
+                    </ul>
+                </section>
+
+                <section id="gallery">
+                    <h2>Gallery</h2>
+                    <div class="gallery-grid-mod">
+                        <img src="img/Slience.png" alt="Trim Example 1">
+                        <img src="img/Wild.png" alt="Trim Example 2">
+                    </div>
+                </section>
+            </main>
+
+            <aside class="sidebar-mod">
+                <div class="sidebar-section actions">
+                    <a href="#" class="button primary-action">
+                        <i class="fas fa-rocket"></i>
+                        Not Released Public Yet
+                    </a>
+                    <button id="faq-open-button" class="button secondary-action">
+                        <i class="fas fa-question-circle"></i>
+                        View FAQ
+                    </button>
+                    <a href="#" class="button secondary-action">
+                        <i class="fas fa-bug"></i>
+                        Report an Issue
+                    </a>
+                </div>
+
+                <div class="sidebar-section metadata">
+                    <h3>Project Info</h3>
+                    <div class="meta-item">
+                        <span class="meta-label">Version</span>
+                        <span class="meta-value">1.0.0</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Status</span>
+                        <span class="meta-value">Active Development</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Created</span>
+                        <span class="meta-value">2025-04-28</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Last Updated</span>
+                        <span class="meta-value">2025-05-04</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">License</span>
+                        <span class="meta-value"><a href="#">Apache 2.0</a></span>
+                    </div>
+                </div>
+                <div id="faq-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2>Frequently Asked Questions</h2>
+                            <button id="faq-close-button" class="modal-close" aria-label="Close FAQ">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="faq-item">
+                                <h4 class="faq-question">How do I activate the primary effect?</h4>
+                                <p class="faq-answer">Hold <kbd>Shift</kbd> and press <kbd>9</kbd>, or move your
+                                    selected slot to the ninth slot and use it.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4 class="faq-question">Is this compatible with X Plugin</h4>
+                                <p class="faq-answer">Currently Tested Plugins:
+                                <ul>
+                                    <li>- Luckperms</li>
+                                    <li>- BetterTeams</li>
+                                    <li>- Grim Anticheat</li>
+                                    <li>- Spartan Anticheat / Vacan</li>
+                                    <li>- Skript</li>
+                                    <li>- SkBee (Skript Addon)</li>
+                                    <li>- EssentialsX</li>
+                                </ul>
+                                </p>
+                            </div>
+                            <div class="faq-item">
+                                <h4 class="faq-question">Where do I Download This?</h4>
+                                <p class="faq-answer">Once Fully Released, You can Download from this Page, or
+                                    Modrinth.<br>it is currently only able to be downloaded by server owners we choose
+                                    to house this plugin, when publicly released, this page will be updated.</p>
+                            </div>
+                            <div class="faq-item">
+                                <h4 class="faq-question">How do I report bugs or suggest features?</h4>
+                                <p class="faq-answer">Please Join the <a href="#" target="_blank"
+                                        rel="noopener noreferrer">Discord</a> linked in the sidebar. To Suggest, and
+                                    Report Bugs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+        <footer class="footer-mod">
+            <p>&copy; 2025 jamie.local | Ariza Productions</p>
+        </footer>
+
+    </div>
+    <script>
+        // Basic JavaScript for FAQ Modal
+        const faqModal = document.getElementById('faq-modal');
+        const openBtn = document.getElementById('faq-open-button');
+        const closeBtn = document.getElementById('faq-close-button');
+
+        const openModal = () => {
+            if (faqModal) faqModal.classList.add('show');
+        };
+
+        const closeModal = () => {
+            if (faqModal) faqModal.classList.remove('show');
+        };
+
+        if (openBtn) {
+            openBtn.addEventListener('click', openModal);
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeModal);
+        }
+
+        if (faqModal) {
+            faqModal.addEventListener('click', (e) => {
+                if (e.target === faqModal) {
+                    closeModal();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && faqModal && faqModal.classList.contains('show')) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

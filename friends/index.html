@@ -2,6 +2,30 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function () {
+            const desktopPageName = 'index.html';
+            const mobilePageName = 'mobile.html';
+
+            const currentPath = window.location.pathname;
+            const currentPage = currentPath.substring(currentPath.lastIndexOf('/') + 1);
+
+            if (currentPage === mobilePageName || currentPage !== desktopPageName) {
+                return;
+            }
+
+            let isMobile = false;
+            if (/Mobi|Android|iPhone|iPad|iPod|Windows Phone/i.test(navigator.userAgent)) {
+                isMobile = true;
+            }
+
+            if (isMobile) {
+                console.log('Mobile device detected. Redirecting to:', mobilePageName);
+                const newUrl = currentPath.substring(0, currentPath.lastIndexOf('/') + 1) + mobilePageName;
+                window.location.href = newUrl;
+            }
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PowerTrims - Java Plugin</title>
