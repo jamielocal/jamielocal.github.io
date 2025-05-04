@@ -1,45 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jamie!</title>
+    <title>Jamie's - Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
+
 <body>
-    <div class="container">
-        <div class="raindrops"></div>
-        <div class="profile-card">
-            <div class="profile-image">
-                <img src="https://cdn.discordapp.com/avatars/1214657865739149312/285fa99840d824187afe524c0ad9ada1?size=1024" alt="Profile Image">
+
+    <header class="header">
+        <nav class="navbar">
+            <a href="#home" class="nav-logo">Jamie.</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-            <div class="profile-info">
-                <h1>Jamie (jamie.local)</h1>
-                <p>Developer / Manager</p>
-                <hr>
-                <h2>Projects</h2>
-                <ul>
-                    <li>Project Light / Nova Client - Moderator To Owner | 1 Year</li>
-                    <li>Ariza Network - Executive To Management | 1 Year</li>
-                    <li>Binary Bit Lab - Executive | 1 Year</li>
-                    <li>Smaller Projects - Moderator To Admin | 2 Years</li>
-                    <li>Syx Studios - Developer / Founder | Present</li>
-                    <li>Ariza - Executive / Founder | Present</li>
-                    <li>Ariza Network (Remastered) - Developer / Executive / Founder - Present</li>
-                    <li>StarbournMCBE - Co-Owner | Present</li>
-                </ul>
-                <hr>
-                <h2>Socials</h2>
-                <ul class="socials-list">
-		    <li><a href="https://x.com/x_dot_com_sucks">Twitter</a></li>
-		    <li><a href="https://matrix.to/#/!aepNTxbRendHKDkPUI:matrix.org?via=matrix.org">matrix.org</a></li>
-                    <li><a href="https://mastodon.social/@jqm1e">Mastodon.social</a></li>
-                    <li><a href="https://github.com/jamielocal">GitHub</a></li>
-                    <li><a href="https://dsc.gg/syxsupport">Discord</a></li>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section section">
+            <div class="hero-content fade-in">
+                <h1>Hi, I'm <span class="highlight">Jamie</span></h1>
+                <p class="subtitle">A Developer And Designer</p>
+                <a href="#projects" class="btn">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+            <div class="social-links fade-in">
+                <a href="https://github.com/jamielocal" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://discord.gg/yN7thEZcuE" aria-label="Discord" target="_blank"
+                    rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+                <a href="https://www.youtube.com/@jamiedoesnothing" aria-label="Youtube" target="_blank"
+                    rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>
+            </div>
+        </section>
+
+        <section id="about" class="about-section section">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content fade-in">
+                <div class="about-text">
+                    <p>Hello! I'm Jamie, passionate about Tech. I specialize in Developing Unique, and Helpful
+                        Apps/Scripts For Stuff</p>
+                    <p>I enjoy coding Bots, Scripts, and Plugins</p>
+                    <p>Here are a few technologies I've been working with recently:</p>
+                    <ul class="skills-list">
+                        <li>Python</li>
+                        <li>Skriptlang (Minecraft Java)</li>
+                        <li>HTML, CSS</li>
+                        <li>Basic Rust</li>
+                        <li>Basic Java Plugin Development</li>
+                        <li>UI / Logo Design</li>
                     </ul>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="images/pfp.jpg" alt="Profile Picture">
+                </div>
             </div>
-        </div>
-    </div>
+        </section>
+
+        <section id="projects" class="projects-section section">
+            <h2 class="section-title fade-in">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <img src="images/smp.png" alt="Galaxy">
+                    <div class="project-info">
+                        <h3>GalaxySMP</h3>
+                        <p>Not my Oldest project, but a newer one. GalaxySMP is a Free to Play Modded Minecraft SMP! BE,
+                            and Java</p>
+                        <div class="project-links">
+                            <a href="https://shop.galaxysmp.org" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-sm">Store and IPs</a>
+                            <a href="https://discord.gg/efYpCn9nsq" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-sm btn-secondary">Discord</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <img src="images/syx.png" alt="Project 2 Thumbnail">
+                    <div class="project-info">
+                        <h3>Syx Studios</h3>
+                        <p>Multiple Projects Under this, Not Currently Running, many such as Syx Bot, Music Bot (Code),
+                            Discord Self Bot (Code), Started By Me.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/jamielocal" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-sm">Code On My Github</a>
+                            <a href="https://discord.gg/yN7thEZcuE" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-sm btn-secondary">Discord</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section section">
+            <h2 class="section-title fade-in">Get In Touch</h2>
+            <p class="contact-subtitle fade-in">Have a question or want to work together? Feel free to reach out!</p>
+            <div class="contact-content fade-in">
+                <a href="https://discord.com/users/1214657865739149312" class="btn contact-button">
+                    <i class="fa-user-o"></i> DM Me!
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 jamie.local All rights reserved.</p>
+        <p>Built with <i class="fas fa-heart" style="color: var(--accent-color);"></i></p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
