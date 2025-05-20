@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Name Forge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /*
+         * Custom styles to complement Tailwind CSS.
+         * These focus on overall page aesthetics and specific component styling
+         * that might be more complex or repetitive to achieve with Tailwind classes alone.
+         */
+        body {
+            font-family: 'Inter', sans-serif; /* Default modern font */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1f2937, #374151); /* Dark gradient background */
+            color: #f9fafb; /* Tailwind gray-50 */
+            padding: 1rem;
+            overflow: hidden; /* Prevent scrollbars from gradient overflow */
+        }
+
+        .container {
+            background-color: rgba(55, 65, 81, 0.9); /* Tailwind gray-700 with slight transparency */
+            backdrop-filter: blur(10px); /* Frosted glass effect for modern feel */
+            padding: 2rem; /* Spacing inside the container */
+            border-radius: 0.75rem; /* Tailwind rounded-lg */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+            text-align: center;
+            width: 100%;
+            max-width: 450px; /* Slightly wider container */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+        }
+
+        .title {
+            font-family: 'Cinzel Decorative', cursive; /* Fantasy-style font for the title */
+            font-size: 2.25rem; /* Tailwind text-4xl */
+            font-weight: 700;
+            margin-bottom: 2rem; /* Tailwind mb-8 */
+            color: #fde68a; /* Tailwind amber-200 for a golden, magical feel */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .name-display-wrapper {
+            min-height: 70px; /* Ensure space for the name + animations */
+            margin-bottom: 2rem; /* Tailwind mb-8 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .name-display {
+            background-color: #4b5563; /* Tailwind gray-600 */
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem; /* Tailwind rounded-md */
+            font-size: 1.5rem; /* Tailwind text-2xl */
+            font-weight: 500; /* Tailwind font-medium */
+            color: #e5e7eb; /* Tailwind gray-200 */
+            opacity: 0; /* Start transparent for fade-in */
+            transform: translateY(10px); /* Start slightly down for animation */
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out; /* Smooth animation */
+            min-width: 200px; /* Minimum width to prevent jitter */
+            text-align: center;
+        }
+
+        .name-display.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .name-display:empty::before {
+            content: "Your hero awaits...";
+            color: #9ca3af; /* Tailwind gray-400 */
+            font-style: italic;
+            font-size: 1.25rem; /* Tailwind text-xl */
+            opacity: 1; /* Ensure placeholder is visible initially */
+            transform: translateY(0);
+        }
+
+        .generate-button {
+            background-color: #7c3aed; /* Tailwind violet-600 */
+            color: white;
+            font-weight: 600; /* Tailwind font-semibold */
+            padding: 0.875rem 2rem; /* Tailwind py-3.5 px-8 */
+            border-radius: 0.5rem; /* Tailwind rounded-md */
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .generate-button:hover {
+            background-color: #6d28d9; /* Tailwind violet-700 */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+        }
+
+        .generate-button:active {
+            transform: translateY(2px) scale(0.98);
+            background-color: #5b21b6; /* Tailwind violet-800 */
+            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Fantasy Name Forge</h1>
+
+        <div class="name-display-wrapper">
+            <div id="nameDisplay" class="name-display"></div>
+        </div>
+
+        <button id="generateButton" class="generate-button">
+            Forge Anew
+        </button>
+    </div>
+
+    <script>
+        // --- DOM Element References ---
+        // It's good practice to get references to DOM elements once and store them.
+        const nameDisplayElement = document.getElementById('nameDisplay');
+        const generateButtonElement = document.getElementById('generateButton');
+
+        // --- Syllable and Suffix Data ---
+        // Expanded lists for more variety.
+        // These could also be fetched from a JSON file or API in a more complex app.
+        const syllables1 = ["Gor", "El", "Zar", "Fin", "Bel", "Mal", "Tor", "Syl", "Var", "Aer", "Cael", "Fen", "Pyr", "Rhys", "Zephyr", "Kel", "Brynn", "Cor", "Astr", "Valer"];
+        const syllables2 = ["a", "e", "i", "o", "u", "ae", "ia", "or", "an", "en", "is", "on", "us", "yr", "ay", "il", "el", "ar", "er", "ir"];
+        const syllables3 = ["gon", "mir", "thos", "wyn", "dor", "lin", "kas", "fyr", "vex", "dar", "ion", "nor", "sil", "tor", "val", "ian", "ien", "lor", "mar", "ser"];
+        const suffixes = [
+            " the Bold", " of Winterfell", " Stormblade", " Ironheart", " Shadowdancer",
+            " Moonwhisper", " Sunfire", " the Justicar", " of Eldoria", " Nightwind",
+            " the Swift", " Stonefist", " Spellweaver", " of the Silent Wood", " Starcaller"
+        ];
+
+        /**
+         * Generates a random integer between min (inclusive) and max (inclusive).
+         * @param {number} min - The minimum value.
+         * @param {number} max - The maximum value.
+         * @returns {number} A random integer.
+         */
+        const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+        /**
+         * Selects a random element from an array.
+         * @param {Array<string>} arr - The array to select from.
+         * @returns {string} A random element from the array.
+         */
+        const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+        /**
+         * Generates a random fantasy-style name.
+         * The core logic is O(1) as it involves a fixed number of random selections and string operations.
+         * @returns {string} The generated name.
+         */
+        function generateRandomName() {
+            const nameParts = [];
+
+            // Randomly decide the number of core syllables (2 or 3)
+            // Using a more descriptive way to express probability.
+            const isThreeSyllableName = Math.random() < 0.4; // 40% chance for 3 core syllables
+
+            nameParts.push(getRandomElement(syllables1));
+            nameParts.push(getRandomElement(syllables2));
+
+            if (isThreeSyllableName) {
+                nameParts.push(getRandomElement(syllables3));
+            } else {
+                // For 2-syllable names, if the second part is a short vowel,
+                // consider adding a short consonant-heavy ending from syllables3 for better flow.
+                const lastPart = nameParts[nameParts.length - 1];
+                if (syllables2.includes(lastPart) && lastPart.length === 1) {
+                    const potentialEndings = syllables3.filter(s => s.length <= 3 && !s.match(/[aeiou]{2}/i)); // Prefer shorter, consonant-rich endings
+                    if (potentialEndings.length > 0 && Math.random() < 0.7) { // 70% chance to add this if applicable
+                        nameParts.push(getRandomElement(potentialEndings));
+                    }
+                }
+            }
+
+            // Join parts and capitalize the first letter of the base name.
+            let baseName = nameParts.join("").toLowerCase();
+            baseName = baseName.charAt(0).toUpperCase() + baseName.slice(1);
+
+            // Optional: Add a suffix (e.g., 30% chance)
+            if (Math.random() < 0.30) {
+                baseName += getRandomElement(suffixes);
+            }
+
+            return baseName;
+        }
+
+        /**
+         * Handles the click event for the generate button.
+         * Generates a new name and updates the display with a fade-in animation.
+         */
+        function handleGenerateClick() {
+            // Disable button briefly to prevent spamming if generation were slow (good practice)
+            generateButtonElement.disabled = true;
+
+            const newName = generateRandomName();
+
+            // Animation for name display
+            nameDisplayElement.classList.remove('visible'); // Hide old name
+            nameDisplayElement.textContent = ''; // Clear content to ensure placeholder doesn't flash
+
+            // Allow time for the fade-out/clearing before showing new name
+            setTimeout(() => {
+                nameDisplayElement.textContent = newName;
+                nameDisplayElement.classList.add('visible'); // Fade in new name
+                generateButtonElement.disabled = false; // Re-enable button
+            }, 100); // Small delay for transition effect
+        }
+
+        // --- Event Listener ---
+        // Attach the event listener to the button.
+        generateButtonElement.addEventListener('click', handleGenerateClick);
+
+        // --- Initial Load ---
+        // Generate and display a name when the page first loads.
+        // Also ensure the placeholder is visible if no name is generated initially.
+        if (nameDisplayElement.textContent === "") {
+            nameDisplayElement.classList.remove('visible'); // Ensure it's hidden before first real name
+             // Set placeholder via CSS :empty::before to avoid JS flash
+        }
+        handleGenerateClick(); // Generate first name
+
+    </script>
+</body>
+</html>
