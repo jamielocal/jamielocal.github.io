@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Embed Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a modern look */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-purple-800 to-indigo-900 min-h-screen p-4 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-4xl space-y-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Discord Embed Generator</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex flex-col">
+                <label for="title" class="text-sm font-medium text-gray-700 mb-1">Title:</label>
+                <input type="text" id="title" placeholder="e.g., Welcome to our Server!"
+                    class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div class="flex flex-col">
+                <label for="color" class="text-sm font-medium text-gray-700 mb-1">Color (HEX):</label>
+                <input type="color" id="color" value="#5865F2"
+                    class="p-1 h-12 w-full border border-gray-300 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+
+            <div class="flex flex-col md:col-span-2">
+                <label for="description" class="text-sm font-medium text-gray-700 mb-1">Description:</label>
+                <textarea id="description" rows="4" placeholder="e.g., This is a cool new embed for announcements!"
+                    class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 resize-y"></textarea>
+            </div>
+
+            <div class="flex flex-col md:col-span-2">
+                <label for="url" class="text-sm font-medium text-gray-700 mb-1">URL (Title Link):</label>
+                <input type="url" id="url" placeholder="e.g., https://your-website.com"
+                    class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6 mt-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Fields</h2>
+            <div id="fields-container" class="space-y-4">
+                <div class="field bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div class="flex flex-col">
+                            <label class="text-xs font-medium text-gray-600 mb-1">Name:</label>
+                            <input type="text"
+                                class="fieldName p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-400"
+                                placeholder="Field Name">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-xs font-medium text-gray-600 mb-1">Value:</label>
+                            <input type="text"
+                                class="fieldValue p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-400"
+                                placeholder="Field Value">
+                        </div>
+                        <div class="flex items-center justify-between md:justify-start gap-2">
+                            <label class="text-xs font-medium text-gray-600">Inline:</label>
+                            <input type="checkbox"
+                                class="fieldInline h-5 w-5 text-purple-600 rounded border-gray-300 focus:ring-purple-500">
+                            <button type="button"
+                                class="remove-field-btn bg-red-500 hover:bg-red-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition duration-200 ease-in-out shadow-sm ml-auto md:ml-4">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="add-field"
+                class="mt-4 w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out shadow-md hover:shadow-lg">
+                Add Another Field
+            </button>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6 mt-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Footer</h2>
+            <div class="flex flex-col">
+                <label for="footerText" class="text-sm font-medium text-gray-700 mb-1">Footer Text:</label>
+                <input type="text" id="footerText" placeholder="e.g., Powered by Example.org"
+                    class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6 mt-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Thumbnail</h2>
+            <div class="flex flex-col">
+                <label for="thumbnailUrl" class="text-sm font-medium text-gray-700 mb-1">Thumbnail URL:</label>
+                <input type="url" id="thumbnailUrl" placeholder="e.g., https://example.org/image.jpg"
+                    class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+            </div>
+        </div>
+
+        <div class="border-t border-gray-200 pt-6 mt-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Author</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex flex-col">
+                    <label for="authorName" class="text-sm font-medium text-gray-700 mb-1">Name:</label>
+                    <input type="text" id="authorName" placeholder="e.g., Jamie"
+                        class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div class="flex flex-col">
+                    <label for="authorIcon" class="text-sm font-medium text-gray-700 mb-1">Icon URL:</label>
+                    <input type="url" id="authorIcon" placeholder="e.g., https://example.org/icon.jpg"
+                        class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+                <div class="flex flex-col">
+                    <label for="authorUrl" class="text-sm font-medium text-gray-700 mb-1">URL:</label>
+                    <input type="url" id="authorUrl" placeholder="e.g., https://example.org/profile"
+                        class="p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500">
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+            <button id="generate-json"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105">
+                Generate JSON
+            </button>
+            <button id="download-json" disabled
+                class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed">
+                Download JSON
+            </button>
+        </div>
+
+        <div class="bg-gray-100 p-6 rounded-lg shadow-inner mt-8">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Generated JSON:</h2>
+            <pre id="json-output" class="bg-gray-800 text-green-400 p-4 rounded-lg overflow-x-auto text-sm"></pre>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get references to all input elements and buttons
+            const titleInput = document.getElementById('title');
+            const colorInput = document.getElementById('color');
+            const descriptionInput = document.getElementById('description');
+            const urlInput = document.getElementById('url');
+            const fieldsContainer = document.getElementById('fields-container');
+            const addFieldButton = document.getElementById('add-field');
+            const footerTextInput = document.getElementById('footerText');
+            const thumbnailUrlInput = document.getElementById('thumbnailUrl');
+            const authorNameInput = document.getElementById('authorName');
+            const authorIconInput = document.getElementById('authorIcon');
+            const authorUrlInput = document.getElementById('authorUrl');
+            const generateButton = document.getElementById('generate-json');
+            const downloadButton = document.getElementById('download-json');
+            const jsonOutput = document.getElementById('json-output');
+
+            let generatedJsonString = null; // To store the generated JSON string for download
+
+            // Function to add a new field input group
+            const addField = () => {
+                const newFieldDiv = document.createElement('div');
+                newFieldDiv.classList.add('field', 'bg-gray-50', 'p-4', 'rounded-lg', 'border', 'border-gray-200');
+                newFieldDiv.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div class="flex flex-col">
+                            <label class="text-xs font-medium text-gray-600 mb-1">Name:</label>
+                            <input type="text" class="fieldName p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-400" placeholder="Field Name">
+                        </div>
+                        <div class="flex flex-col">
+                            <label class="text-xs font-medium text-gray-600 mb-1">Value:</label>
+                            <input type="text" class="fieldValue p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-purple-400" placeholder="Field Value">
+                        </div>
+                        <div class="flex items-center justify-between md:justify-start gap-2">
+                            <label class="text-xs font-medium text-gray-600">Inline:</label>
+                            <input type="checkbox" class="fieldInline h-5 w-5 text-purple-600 rounded border-gray-300 focus:ring-purple-500">
+                            <button type="button" class="remove-field-btn bg-red-500 hover:bg-red-600 text-white text-sm font-semibold py-1 px-3 rounded-md transition duration-200 ease-in-out shadow-sm ml-auto md:ml-4">Remove</button>
+                        </div>
+                    </div>
+                `;
+                fieldsContainer.appendChild(newFieldDiv);
+
+                // Add event listener for the new remove button
+                newFieldDiv.querySelector('.remove-field-btn').addEventListener('click', (event) => {
+                    event.target.closest('.field').remove();
+                });
+            };
+
+            // Add initial field if none exists (though one is in HTML by default)
+            if (fieldsContainer.children.length === 0) {
+                addField();
+            }
+
+            // Event listener for "Add Another Field" button
+            addFieldButton.addEventListener('click', addField);
+
+            // Event listener for "Generate JSON" button
+            generateButton.addEventListener('click', () => {
+                const embedData = {};
+
+                // Title
+                if (titleInput.value) {
+                    embedData.title = titleInput.value;
+                }
+
+                // Color (remove '#' and convert to uppercase)
+                embedData.color = colorInput.value.substring(1).toUpperCase();
+
+                // Description
+                if (descriptionInput.value) {
+                    embedData.description = descriptionInput.value;
+                }
+
+                // URL
+                if (urlInput.value) {
+                    embedData.url = urlInput.value;
+                }
+
+                // Fields
+                const fieldDivs = fieldsContainer.querySelectorAll('.field');
+                let fieldCount = 0;
+                fieldDivs.forEach(fieldDiv => {
+                    const nameInput = fieldDiv.querySelector('.fieldName');
+                    const valueInput = fieldDiv.querySelector('.fieldValue');
+                    const inlineInput = fieldDiv.querySelector('.fieldInline');
+
+                    // Only add field if both name and value are provided
+                    if (nameInput.value && valueInput.value) {
+                        fieldCount++;
+                        embedData[`field${fieldCount}`] = {
+                            name: nameInput.value,
+                            value: valueInput.value,
+                            inline: inlineInput.checked
+                        };
+                    }
+                });
+
+                // Footer
+                if (footerTextInput.value) {
+                    embedData.footer = { text: footerTextInput.value };
+                }
+
+                // Thumbnail
+                if (thumbnailUrlInput.value) {
+                    embedData.thumbnail = { url: thumbnailUrlInput.value };
+                }
+
+                // Author
+                if (authorNameInput.value || authorIconInput.value || authorUrlInput.value) {
+                    embedData.author = {};
+                    if (authorNameInput.value) {
+                        embedData.author.name = authorNameInput.value;
+                    }
+                    if (authorIconInput.value) {
+                        embedData.author.icon = authorIconInput.value;
+                    }
+                    if (authorUrlInput.value) {
+                        embedData.author.url = authorUrlInput.value;
+                    }
+                }
+
+                // Convert the object to a JSON string with pretty printing
+                generatedJsonString = JSON.stringify(embedData, null, 4);
+                jsonOutput.textContent = generatedJsonString; // Display JSON in the <pre> tag
+                downloadButton.disabled = false; // Enable download button
+            });
+
+            // Event listener for "Download JSON" button
+            downloadButton.addEventListener('click', () => {
+                if (generatedJsonString) {
+                    const filename = 'discord_embed.json';
+                    // Create a Blob from the JSON string with application/json MIME type
+                    const blob = new Blob([generatedJsonString], { type: 'application/json' });
+                    // Create a temporary URL for the Blob
+                    const url = URL.createObjectURL(blob);
+
+                    // Create a temporary <a> element to trigger the download
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename; // Set the desired filename
+
+                    // Append the <a> element to the body, click it, and then remove it
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+
+                    // Revoke the object URL to free up memory
+                    URL.revokeObjectURL(url);
+                }
+            });
+
+            // Add event listener for the initial remove button
+            fieldsContainer.querySelector('.remove-field-btn').addEventListener('click', (event) => {
+                event.target.closest('.field').remove();
+            });
+        });
+    </script>
+</body>
+
+</html>
