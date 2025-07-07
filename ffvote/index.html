@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vote Links</title>
+</head>
+
+<body>
+    <button onclick="openVoteLinks()">Open Vote Sites</button>
+
+    <script>
+        function openVoteLinks() {
+            const urls = [
+                "https://mclist.gg/server/189",
+                "https://minecraftservers.org/vote/672312",
+                "https://minecraft.menu/server-frosty-ferns.4596/vote",
+                "https://minecraft-serverlist.com/server/2619/vote"
+            ];
+
+            for (const url of urls) {
+                window.open(url, '_blank');
+            }
+        }
+    </script>
+</body>
+
+</html>
