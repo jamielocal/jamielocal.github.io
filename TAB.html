@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Text Config</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use a simple font that looks good with pixelated styling -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        
+        :root {
+            --mc-bg: #1e1e1e;
+            --mc-border: #000000;
+            --mc-light-border: #4a4a4a;
+            --mc-text: #ffffff;
+            font-family: monospace, sans-serif;
+        }
+
+        body {
+            background-color: #2c2c2c;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .mc-window {
+            background-color: var(--mc-bg);
+            border: 4px solid var(--mc-border);
+            border-radius: 0;
+            box-shadow: 
+                4px 4px 0 #000000, 
+                inset 2px 2px 0 var(--mc-light-border),
+                inset -2px -2px 0 var(--mc-border);
+            max-width: 1200px; /* Increased width for two-column layout */
+            width: 95%;
+            padding: 1.5rem;
+        }
+
+        .mc-input, .mc-preview-box {
+            background-color: #000000;
+            color: var(--mc-text);
+            border: 2px solid #555555;
+            padding: 0.5rem;
+            resize: none;
+            outline: none;
+            box-shadow: inset 1px 1px 0 #333333;
+            font-family: 'VT323', monospace; /* Use a retro font for text areas */
+            font-size: 1.25rem;
+            min-height: 3rem; /* Ensure minimum height */
+        }
+        
+        /* Make sure focused input has a visible border indicator */
+        .mc-input:focus {
+            border-color: #55FFFF; /* Aqua border on focus */
+        }
+
+        .mc-button {
+            @apply px-3 py-2 text-sm font-bold transition duration-100 ease-in-out cursor-pointer select-none;
+            background-color: #5b5b5b;
+            color: var(--mc-text);
+            border: 2px solid #000000;
+            border-radius: 0;
+            box-shadow: 
+                2px 2px 0 #000000, 
+                inset 1px 1px 0 #7c7c7c, 
+                inset -1px -1px 0 #3b3b3b;
+        }
+        
+        /* Individual copy button specific styles */
+        .copy-btn {
+            @apply text-xs px-2 py-1 ml-2 inline-flex items-center;
+            min-width: 2.5rem;
+            background-color: #4a4a4a;
+            box-shadow: 1px 1px 0 #000000;
+        }
+        .copy-btn:hover {
+            background-color: #5c5c5c;
+        }
+        .copy-btn:active {
+            box-shadow: 0 0 0 #000000;
+        }
+
+        .mc-button:hover {
+            background-color: #6b6b6b;
+        }
+        .mc-button:active {
+            box-shadow: 
+                inset 1px 1px 0 #000000, 
+                inset 1px 1px 0 #3b3b3b;
+            transform: translateY(1px);
+        }
+
+        /* Minecraft Color Codes */
+        .c0 { color: #000000; } /* Black */
+        .c1 { color: #0000AA; } /* Dark Blue */
+        .c2 { color: #00AA00; } /* Dark Green */
+        .c3 { color: #00AAAA; } /* Dark Aqua */
+        .c4 { color: #AA0000; } /* Dark Red */
+        .c5 { color: #AA00AA; } /* Dark Purple */
+        .c6 { color: #FFAA00; } /* Gold */
+        .c7 { color: #AAAAAA; } /* Gray */
+        .c8 { color: #555555; } /* Dark Gray */
+        .c9 { color: #5555FF; } /* Blue */
+        .ca { color: #55FF55; } /* Green */
+        .cb { color: #55FFFF; } /* Aqua */
+        .cc { color: #FF5555; } /* Red */
+        .cd { color: #FF55FF; } /* Light Purple */
+        .ce { color: #FFFF55; } /* Yellow */
+        .cf { color: #FFFFFF; } /* White */
+
+        /* Minecraft Format Codes */
+        .l { font-weight: bold; }       /* Bold */
+        .m { text-decoration: line-through; } /* Strikethrough */
+        .n { text-decoration: underline; } /* Underline */
+        .o { font-style: italic; }     /* Italic */
+        .k { 
+            animation: obfuscate 0.1s infinite alternate; 
+            display: inline-block;
+        } /* Obfuscated */
+
+        @keyframes obfuscate {
+            from { opacity: 1; }
+            to { opacity: 0.8; }
+        }
+
+        /* Hide Scrollbar for Preview */
+        .mc-preview-box::-webkit-scrollbar {
+            display: none;
+        }
+        .mc-preview-box {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        
+        .mc-tab-list-container {
+            /* Mimics the dark overlay of the tab list */
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(0, 0, 0, 0.8);
+            padding: 0.75rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            min-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .mc-tab-list-header, .mc-tab-list-footer {
+            /* Text alignment for header/footer in tab list */
+            text-align: center;
+            line-height: 1.5;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mc-tab-list-player-entry {
+            line-height: 1.5;
+            padding: 0.2rem 0;
+        }
+
+        /* Custom style for the color buttons to show the color */
+        .color-btn {
+            width: 2rem;
+            height: 2rem;
+            border: 1px solid #000000;
+            box-shadow: inset 1px 1px 0 #ffffff40;
+        }
+    </style>
+</head>
+<body class="selection:bg-yellow-500 selection:text-black">
+    <div class="mc-window">
+        <h1 class="text-xl text-yellow-300 mb-6 border-b-2 border-yellow-800 pb-2">Minecraft Tab List Configurator</h1>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            
+            <!-- LEFT COLUMN: LIVE PREVIEW -->
+            <div class="w-full lg:w-5/12">
+                <h2 class="text-white text-lg font-bold mb-4">Live Tab List Preview</h2>
+                <div class="mc-tab-list-container">
+                    <div id="tabListPreview" class="text-white">
+                        <!-- Full preview content generated here -->
+                        <p class="text-center text-gray-500 italic p-12">Type content in the fields on the right to see the preview here.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: CONFIGURATION TOOLS -->
+            <div class="w-full lg:w-7/12">
+                
+                <!-- Formatting Buttons -->
+                <div id="formattingTools" class="mb-8 p-3 rounded-md border-2 border-dashed border-gray-700">
+                    <h2 class="text-sm text-gray-400 mb-2 font-bold">Formatting Code Injector (Select an input box below, then click a button)</h2>
+
+                    <!-- Colors -->
+                    <div class="mb-4">
+                        <span class="text-white text-sm mr-2 block sm:inline-block sm:mb-0 mb-1">Colors:</span>
+                        <div class="flex flex-wrap gap-1">
+                            <button class="color-btn bg-black" data-code="&0" style="background-color: #000000;"></button>
+                            <button class="color-btn bg-dark-blue" data-code="&1" style="background-color: #0000AA;"></button>
+                            <button class="color-btn bg-dark-green" data-code="&2" style="background-color: #00AA00;"></button>
+                            <button class="color-btn bg-dark-aqua" data-code="&3" style="background-color: #00AAAA;"></button>
+                            <button class="color-btn bg-dark-red" data-code="&4" style="background-color: #AA0000;"></button>
+                            <button class="color-btn bg-dark-purple" data-code="&5" style="background-color: #AA00AA;"></button>
+                            <button class="color-btn bg-gold" data-code="&6" style="background-color: #FFAA00;"></button>
+                            <button class="color-btn bg-gray" data-code="&7" style="background-color: #AAAAAA;"></button>
+                            <button class="color-btn bg-dark-gray" data-code="&8" style="background-color: #555555;"></button>
+                            <button class="color-btn bg-blue" data-code="&9" style="background-color: #5555FF;"></button>
+                            <button class="color-btn bg-green" data-code="&a" style="background-color: #55FF55;"></button>
+                            <button class="color-btn bg-aqua" data-code="&b" style="background-color: #55FFFF;"></button>
+                            <button class="color-btn bg-red" data-code="&c" style="background-color: #FF5555;"></button>
+                            <button class="color-btn bg-light-purple" data-code="&d" style="background-color: #FF55FF;"></button>
+                            <button class="color-btn bg-yellow" data-code="&e" style="background-color: #FFFF55;"></button>
+                            <button class="color-btn bg-white" data-code="&f" style="background-color: #FFFFFF;"></button>
+                        </div>
+                    </div>
+
+                    <!-- Formats -->
+                    <div class="mb-2">
+                        <span class="text-white text-sm mr-2 block sm:inline-block sm:mb-0 mb-1">Formats:</span>
+                        <div class="flex flex-wrap gap-1">
+                            <button class="mc-button" data-code="&l">B (Bold)</button>
+                            <button class="mc-button" data-code="&o">I (Italic)</button>
+                            <button class="mc-button" data-code="&n">U (Underline)</button>
+                            <button class="mc-button" data-code="&m">S (Strike)</button>
+                            <button class="mc-button" data-code="&k">K (Obfuscated)</button>
+                            <button class="mc-button mc-button-danger" data-code="&r" style="background-color: #AA0000;">&r (Reset)</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tab List Configuration Sections -->
+                <div class="space-y-6">
+                    
+                    <!-- 1. Header Section -->
+                    <div>
+                        <label for="headerInput" class="text-white block mb-2 font-bold text-lg text-green-400">1. Header Text:
+                            <button data-target="headerInput" class="copy-btn mc-button" title="Copy Raw Header Text">📋</button>
+                        </label>
+                        <textarea id="headerInput" class="mc-input w-full h-16" placeholder="Example: &bThe Awesome Server &7| &aOnline: %online%/%max%"></textarea>
+                    </div>
+
+                    <!-- 2. Per-User Format Section -->
+                    <div>
+                        <label for="userFormatInput" class="text-white block mb-2 font-bold text-lg text-blue-400">2. Player/User Format (Per-User):
+                            <button data-target="userFormatInput" class="copy-btn mc-button" title="Copy Raw User Format Text">📋</button>
+                        </label>
+                        <textarea id="userFormatInput" class="mc-input w-full h-16" placeholder="Example: &a%player% &7| &c%health% &8&l[&f%ping%ms&8&l]"></textarea>
+                    </div>
+
+                    <!-- 3. Footer Section -->
+                    <div>
+                        <label for="footerInput" class="text-white block mb-2 font-bold text-lg text-red-400">3. Footer Text:
+                            <button data-target="footerInput" class="copy-btn mc-button" title="Copy Raw Footer Text">📋</button>
+                        </label>
+                        <textarea id="footerInput" class="mc-input w-full h-16" placeholder="Example: &7Type &e/shop &7to buy items!"></textarea>
+                    </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="mt-8 pt-4 border-t-2 border-gray-700 flex flex-col sm:flex-row gap-4">
+                    <button id="copyAllBtn" class="mc-button bg-blue-600 hover:bg-blue-700 text-base flex-1">Copy Config (YAML Structure)</button>
+                    <button id="downloadBtn" class="mc-button bg-green-600 hover:bg-green-700 text-base flex-1">Download tablist.yml</button>
+                </div>
+
+                <!-- Placeholder Reference -->
+                <div class="mt-8 p-3 bg-gray-900 border-2 border-gray-700">
+                    <h3 class="text-yellow-400 text-sm font-bold mb-2">Placeholder Reference:</h3>
+                    <div class="grid grid-cols-2 gap-2 text-xs text-gray-300">
+                        <span><code class="text-red-400">%health%</code>: 20/20</span>
+                        <span><code class="text-red-400">%ping%</code>: Random (100-245)</span>
+                        <span><code class="text-red-400">%online%</code>: 4</span>
+                        <span><code class="text-red-400">%max%</code>: 16</span>
+                        <span><code class="text-red-400">%player%</code>: TabConfig</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const formattingTools = document.getElementById('formattingTools');
+            const tabListPreview = document.getElementById('tabListPreview');
+            let activeInput = null; // Stores the currently focused textarea element
+
+            // Define all configuration areas
+            const textAreas = [
+                { id: 'headerInput', default: '&6&lWELCOME TO &b&lTHE SERVER &r\n&7Online: &a%online%/%max%' },
+                { id: 'userFormatInput', default: '&a%player% &7| &c%health% &8[&f%ping%ms&8]' },
+                { id: 'footerInput', default: '&7Server IP: &ePlay.Example.net &r\n&7Type &e/shop &7to browse items!' }
+            ];
+
+            const SIMULATED_PLAYERS = ['TabConfig', 'Notch', 'Jeb_', 'Player007'];
+
+            // --- 1. Placeholders and Utility ---
+
+            const getRandomInt = (min, max) => {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            };
+
+            const GLOBAL_PLACEHOLDERS = {
+                '%health%': '20/20',
+                '%online%': '4',
+                '%max%': '16',
+            };
+            
+            // Map used internally for formatting codes to CSS classes
+            const COLOR_MAP = {
+                '0': 'c0', '1': 'c1', '2': 'c2', '3': 'c3', '4': 'c4', '5': 'c5', 
+                '6': 'c6', '7': 'c7', '8': 'c8', '9': 'c9', 'a': 'ca', 'b': 'cb', 
+                'c': 'cc', 'd': 'cd', 'e': 'ce', 'f': 'cf'
+            };
+
+            const FORMAT_MAP = {
+                'l': 'l', 'm': 'm', 'n': 'n', 'o': 'o', 'k': 'k'
+            };
+
+            const FORMAT_CODES_REGEX = /&([0-9a-fk-or])/gi;
+
+
+            /**
+             * Replaces non-player-specific placeholders and splits text by newline.
+             * @param {string} text 
+             * @returns {string[]} Array of lines with global placeholders replaced.
+             */
+            const replaceGlobalPlaceholders = (text) => {
+                let processedText = text;
+                for (const placeholder in GLOBAL_PLACEHOLDERS) {
+                    // %ping% is handled dynamically to change on every update
+                    if (placeholder === '%ping%') {
+                         processedText = processedText.replace(new RegExp(placeholder.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), getRandomInt(100, 245).toString());
+                    } else {
+                        processedText = processedText.replace(new RegExp(placeholder.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'g'), GLOBAL_PLACEHOLDERS[placeholder]);
+                    }
+                }
+                // Split by newline to process lines individually
+                return processedText.split('\n');
+            };
+
+            /**
+             * Converts Minecraft (&) formatting codes to styled HTML spans for a single line.
+             * @param {string} line The raw text line.
+             * @returns {string} The HTML string for the preview line.
+             */
+            const formatLine = (line) => {
+                // Escape HTML special characters first
+                const escapedText = line.replace(/&/g, '\uffff').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\uffff/g, '&');
+                
+                // Split the text by the formatting codes
+                const parts = escapedText.split(FORMAT_CODES_REGEX);
+                
+                let html = '';
+                let currentColorClass = 'cf'; // Default to white
+                let currentFormatClasses = new Set(); // Stores active format classes (l, m, n, o, k)
+
+                for (let i = 0; i < parts.length; i++) {
+                    const part = parts[i];
+
+                    if (i % 2 === 0) {
+                        // This is a text segment
+                        if (part.length > 0) {
+                            const formatClasses = Array.from(currentFormatClasses).join(' ');
+                            const classList = `${currentColorClass} ${formatClasses}`;
+                            
+                            html += `<span class="${classList}">${part}</span>`;
+                        }
+                    } else {
+                        // This is a formatting code (e.g., 'c', 'l', 'r')
+                        const code = part.toLowerCase();
+
+                        if (COLOR_MAP[code]) {
+                            // New color: resets all formats
+                            currentColorClass = COLOR_MAP[code];
+                            currentFormatClasses.clear();
+                        } else if (FORMAT_MAP[code]) {
+                            // New format: stackable (except for &r)
+                            currentFormatClasses.add(FORMAT_MAP[code]);
+                        } else if (code === 'r') {
+                            // Reset: resets all color and format
+                            currentColorClass = 'cf'; // Reset to white
+                            currentFormatClasses.clear();
+                        }
+                    }
+                }
+                return html;
+            };
+
+            // --- 2. Full Preview Generation Logic ---
+
+            const buildTabList = () => {
+                const headerInput = document.getElementById('headerInput').value;
+                const userFormatInput = document.getElementById('userFormatInput').value;
+                const footerInput = document.getElementById('footerInput').value;
+
+                let html = '';
+
+                // 1. HEADER
+                const headerLines = replaceGlobalPlaceholders(headerInput);
+                if (headerLines.join('').trim().length > 0) {
+                    html += '<div class="mc-tab-list-header text-xs sm:text-sm">';
+                    headerLines.forEach(line => {
+                        html += `<div>${formatLine(line)}</div>`;
+                    });
+                    html += '</div>';
+                }
+
+                // 2. PLAYER LIST
+                html += '<div class="mc-tab-list-players p-2 text-xs sm:text-sm grid grid-cols-1 sm:grid-cols-2">';
+
+                SIMULATED_PLAYERS.forEach(playerName => {
+                    // Start with the user format text
+                    let playerLine = userFormatInput;
+                    
+                    // 2a. Replace %player% with the simulated name
+                    playerLine = playerLine.replace(/%player%/g, playerName);
+                    
+                    // 2b. Replace global placeholders (ping, health, etc.)
+                    const processedLine = replaceGlobalPlaceholders(playerLine)[0]; // Player format is usually one line
+                    
+                    // 2c. Format and add to HTML
+                    html += `<div class="mc-tab-list-player-entry col-span-1">${formatLine(processedLine)}</div>`;
+                });
+
+                html += '</div>';
+                
+                // 3. FOOTER
+                const footerLines = replaceGlobalPlaceholders(footerInput);
+                 if (footerLines.join('').trim().length > 0) {
+                    html += '<div class="mc-tab-list-footer text-xs sm:text-sm">';
+                    footerLines.forEach(line => {
+                        html += `<div>${formatLine(line)}</div>`;
+                    });
+                    html += '</div>';
+                }
+
+                tabListPreview.innerHTML = html;
+            };
+
+
+            // --- 3. Code Insertion & Utility Logic ---
+
+            /**
+             * Utility to copy text to the clipboard using the recommended method.
+             * @param {string} text - The text to copy.
+             * @returns {boolean} True if successful, false otherwise.
+             */
+            const copyToClipboard = (text) => {
+                try {
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = text;
+                    tempTextArea.style.position = 'fixed';
+                    tempTextArea.style.opacity = '0';
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempTextArea);
+                    return true;
+                } catch (err) {
+                    console.error('Could not copy text: ', err);
+                    return false;
+                }
+            };
+
+            /**
+             * Shows visual feedback on a button after a copy operation.
+             * @param {HTMLElement} button - The button element.
+             */
+            const showCopyFeedback = (button) => {
+                const originalContent = button.innerHTML;
+                button.classList.add('bg-green-500');
+                button.innerHTML = '✅ Copied!';
+                
+                setTimeout(() => {
+                    button.classList.remove('bg-green-500');
+                    button.innerHTML = originalContent;
+                }, 1000);
+            };
+
+            /**
+             * Generates the configuration content in YAML format.
+             * @returns {string} The formatted YAML string.
+             */
+            const generateYamlConfig = () => {
+                const header = document.getElementById('headerInput').value;
+                const userFormat = document.getElementById('userFormatInput').value;
+                const footer = document.getElementById('footerInput').value;
+
+                // Escape quotes and ensure multi-line strings are handled with '|'
+                const formatYamlString = (text, isMultiLine = false) => {
+                    if (isMultiLine) {
+                        // Replace newline with YAML line break indicator and indent
+                        const lines = text.split('\n').map(line => `      ${line}`).join('\n');
+                        // Use '|' to indicate literal block scalar style
+                        return `|\n${lines}`;
+                    }
+                    // For single line, escape quotes if necessary
+                    return `'${text.replace(/'/g, "''")}'`;
+                };
+
+                return `# Minecraft Tab List Configuration
+# Generated by the Gemini Configurator
+
+tab_list:
+  # This section supports multiple lines using the \n newline character.
+  header: ${formatYamlString(header, true)}
+  
+  # This is the format applied to each player slot.
+  player_format: ${formatYamlString(userFormat, false)}
+  
+  # This section supports multiple lines using the \n newline character.
+  footer: ${formatYamlString(footer, true)}
+`;
+            };
+
+            /**
+             * Handles the download of the YAML config file.
+             */
+            const downloadConfig = () => {
+                const configContent = generateYamlConfig();
+                const blob = new Blob([configContent], { type: 'text/yaml' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'tablist_config.yml';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            };
+
+            /**
+             * Inserts a code string into the active textarea at the current cursor position.
+             * @param {string} code 
+             */
+            const insertCode = (code) => {
+                const textInput = activeInput;
+                if (!textInput) return; // Do nothing if no input is focused
+
+                const start = textInput.selectionStart;
+                const end = textInput.selectionEnd;
+                const value = textInput.value;
+
+                textInput.value = value.substring(0, start) + code + value.substring(end);
+                
+                // Move cursor after the inserted code
+                textInput.selectionStart = textInput.selectionEnd = start + code.length;
+                
+                textInput.focus();
+                buildTabList(); // Update the full preview after insertion
+            };
+
+            // --- 4. Event Listeners and Initialization ---
+
+            // Set up listeners for all text areas
+            textAreas.forEach(area => {
+                const input = document.getElementById(area.id);
+                
+                if (input) {
+                    // Set initial value
+                    input.value = area.default;
+
+                    // Update full preview on input 
+                    input.addEventListener('input', buildTabList);
+                    
+                    // Set active element on focus
+                    input.addEventListener('focus', () => {
+                        activeInput = input;
+                    });
+                    
+                    // Handle blur to correctly manage activeInput when clicking outside textareas
+                    input.addEventListener('blur', () => {
+                        if (activeInput === input) {
+                            // Delaying the clear prevents issues when clicking buttons
+                            setTimeout(() => {
+                                // Check if the focus has moved to a button
+                                if (!document.activeElement.closest('#formattingTools') && !document.activeElement.classList.contains('copy-btn')) {
+                                    activeInput = null;
+                                }
+                            }, 0);
+                        }
+                    });
+                }
+            });
+
+            // Set up button handlers for code injection
+            formattingTools.querySelectorAll('button[data-code]').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const code = e.currentTarget.dataset.code;
+                    insertCode(code);
+                });
+            });
+
+            // Set up individual copy button handlers
+            document.querySelectorAll('.copy-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const targetId = e.currentTarget.dataset.target;
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement && copyToClipboard(targetElement.value)) {
+                        showCopyFeedback(e.currentTarget);
+                    }
+                });
+            });
+
+            // Set up main action button handlers
+            document.getElementById('copyAllBtn').addEventListener('click', (e) => {
+                const config = generateYamlConfig();
+                if (copyToClipboard(config)) {
+                    showCopyFeedback(e.currentTarget);
+                }
+            });
+
+            document.getElementById('downloadBtn').addEventListener('click', downloadConfig);
+
+            // Initial update to populate the full preview
+            buildTabList();
+            
+            // Focus on the first input to start
+            document.getElementById('headerInput').focus();
+        });
+    </script>
+</body>
+</html>
