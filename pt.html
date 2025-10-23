@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerTrims - Transform Your Minecraft Gameplay</title>
+    <meta name="description" content="The official site for the PowerTrims Minecraft plugin. Discover unique abilities, perform rituals for ultimate power, and transform your server.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #121212;
+            --bg-tertiary: #1A1A1A;
+            --accent-primary: #D4AF37;
+            --accent-secondary: #FFD700;
+            --text-primary: #F5F5F5;
+            --text-secondary: #B0B0B0;
+            --text-muted: #666666;
+            --border-color: #2A2A2A;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --card-gradient: linear-gradient(145deg, #1A1A1A 0%, #121212 100%);
+            --font-header: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --discord-color: #5865F2;
+            --modrinth-color: #1bd96a;
+            --github-color: #f0f6fc;
+        }
+
+        *, *::before, *::after { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+
+        section.page { 
+            padding: 80px 0; 
+            animation: fadeIn 0.5s ease-in-out; 
+        }
+        
+        h1, h2, h3, h4 { 
+            font-family: var(--font-header); 
+            font-weight: 700; 
+            color: var(--text-primary); 
+            margin-bottom: 1rem;
+        }
+
+        h1 { 
+            font-size: 3.5rem; 
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 { 
+            font-size: 2.5rem; 
+            text-align: center; 
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+        }
+
+        h3 { 
+            font-size: 1.5rem; 
+            color: var(--accent-primary); 
+        }
+
+        h4 { 
+            font-family: var(--font-header); 
+            font-size: 1.2rem; 
+        }
+
+        p { 
+            margin-bottom: 1rem; 
+            color: var(--text-secondary);
+        }
+
+        p.section-subtitle { 
+            text-align: center; 
+            max-width: 700px; 
+            margin: 0 auto 60px auto; 
+            font-size: 1.1rem; 
+            color: var(--text-secondary);
+        }
+
+        a { 
+            color: var(--accent-primary); 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+        }
+
+        a:hover { 
+            color: var(--accent-secondary); 
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            padding: 15px 0; 
+            z-index: 1000; 
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        .nav-logo { 
+            font-family: var(--font-header); 
+            font-size: 1.8rem; 
+            color: var(--accent-primary); 
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo::before {
+            content: '';
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            margin-right: 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links { 
+            list-style: none; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            gap: 30px; 
+            align-items: center;
+        }
+
+        .nav-links a { 
+            font-weight: 500; 
+            font-family: var(--font-body); 
+            cursor: pointer; 
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover { 
+            color: var(--accent-primary); 
+            text-decoration: none; 
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--bg-secondary);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            z-index: 1;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-primary);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--bg-tertiary);
+            color: var(--accent-primary);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--bg-secondary);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Hero Section */
+        .hero { 
+            position: relative;
+            padding: 180px 0 120px; 
+            text-align: center; 
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero h1 { 
+            font-size: 4rem; 
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .subtitle { 
+            font-size: 1.25rem; 
+            max-width: 700px; 
+            margin: 0 auto 40px; 
+            color: var(--text-secondary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 35px; 
+            font-family: var(--font-body);
+            text-decoration: none; 
+            color: var(--text-primary); 
+            background-color: transparent;
+            border: 2px solid var(--accent-primary); 
+            border-radius: 8px; 
+            transition: all 0.3s ease-in-out; 
+            font-size: 1rem; 
+            font-weight: 600; 
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+            transition: left 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover { 
+            background-color: rgba(212, 175, 55, 0.1); 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn.primary { 
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: var(--bg-primary); 
+            border: none;
+        }
+
+        .btn.primary:hover { 
+            background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn.discord {
+            background-color: var(--discord-color);
+            color: white;
+            border: none;
+        }
+
+        .btn.discord:hover {
+            background-color: #4752c4;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn.modrinth {
+            background-color: var(--modrinth-color);
+            color: #000;
+            border: none;
+        }
+
+        .btn.modrinth:hover {
+            background-color: #17c25c;
+            box-shadow: 0 0 15px rgba(27, 217, 106, 0.4);
+        }
+
+        .btn.github {
+            background-color: var(--github-color);
+            color: #000;
+            border: none;
+        }
+
+        .btn.github:hover {
+            background-color: #dbeafe;
+            box-shadow: 0 0 15px rgba(240, 246, 252, 0.4);
+        }
+
+        /* Section Backgrounds */
+        .alt-bg { 
+            background: var(--bg-secondary); 
+            position: relative;
+        }
+
+        .alt-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, transparent 0%, rgba(212, 175, 55, 0.03) 100%);
+            pointer-events: none;
+        }
+        
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: var(--card-gradient);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        a.card-link { 
+            text-decoration: none; 
+            color: inherit; 
+            display: block;
+        }
+        
+        a.card-link .card:hover {
+            border-color: var(--accent-primary);
+        }
+
+        /* Code Styling */
+        pre { 
+            background-color: var(--bg-tertiary); 
+            color: var(--text-primary); 
+            padding: 20px; 
+            border-radius: 8px; 
+            border: 1px solid var(--border-color); 
+            font-family: monospace; 
+            white-space: pre-wrap; 
+            word-wrap: break-word; 
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        code { 
+            background-color: var(--bg-tertiary); 
+            padding: 3px 6px; 
+            border-radius: 4px; 
+            font-family: monospace; 
+            border: 1px solid var(--border-color); 
+            color: var(--accent-primary);
+        }
+        
+        /* Content Sections */
+        .wiki-content, .ritual-content, .config-content { 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+
+        .wiki-stats {
+            margin-top: 30px;
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .wiki-stats th, .wiki-stats td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .wiki-stats th { 
+            background-color: var(--bg-tertiary); 
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .wiki-stats tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .wiki-content .wiki-stats + h3 {
+            margin-top: 60px;
+        }
+        
+        /* Footer */
+        .footer { 
+            text-align: center; 
+            padding: 40px 0; 
+            border-top: 1px solid var(--border-color); 
+            background: var(--bg-secondary);
+        }
+
+        /* Page Navigation */
+        .page { 
+            display: none; 
+        }
+
+        .page.active { 
+            display: block; 
+        }
+
+        /* Social Links */
+        .social-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+            flex-wrap: wrap; 
+        }
+        
+        /* Animations */
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 0; }
+            .navbar { position: relative; }
+            .nav-links { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-secondary);
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hero h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .hero { padding: 120px 0 80px; }
+            .btn { padding: 12px 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="#home" class="nav-logo pagelink">PowerTrims</a>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#">Documentation <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="/docs#abilities">Abilities</a>
+                        <a href="/docs#rituals">Rituals</a>
+                        <a href="/docs#config">Configuration</a>
+                    </div>
+                </li>
+                <li><a href="#" id="community-link">Community</a></li>
+                <li><a href="#" id="download-link">Download</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Community Modal -->
+    <div id="community-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Join Our Community</h2>
+            <p>Connect with other PowerTrims users, get support, and share your ideas!</p>
+            <div style="margin: 30px 0;">
+                <a href="https://discord.gg/2uU3Rsw3" class="btn discord" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-discord"></i> Join our Discord
+                </a>
+            </div>
+            <p>Or check out our source code on GitHub:</p>
+            <a href="https://github.com/divi922/POWER-TRIMS" class="btn github" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </div>
+    </div>
+
+    <!-- Download Modal -->
+    <div id="download-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Download PowerTrims</h2>
+            <p>Get the latest version of PowerTrims for your Minecraft server.</p>
+            <div style="margin: 30px 0; display: flex; flex-direction: column; gap: 15px;">
+                <a href="https://modrinth.com/plugin/power-trimss" class="btn modrinth" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-download"></i> Download on Modrinth
+                </a>
+                <a href="https://github.com/divi922/POWER-TRIMS/releases" class="btn github" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> Releases on GitHub
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section id="page-home" class="page active">
+            <div class="hero">
+                <div class="container">
+                    <h1>Give Your Armor Real Power</h1>
+                    <p class="subtitle">PowerTrims is a plugin that turns cosmetic armor trims into useful abilities, adding new gameplay and strategy to your server.</p>
+                    <a class="btn primary" href="#" id="download-hero-link">Get The Plugin</a>
+                </div>
+            </div>
+
+            <div class="alt-bg" style="padding: 100px 0;">
+                <div class="container">
+                    <h2>Key Features</h2>
+                    <p class="section-subtitle">PowerTrims is designed to be powerful, fair, and easy to manage.</p>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h3>17+ Unique Abilities</h3>
+                            <p>Give your players new powers to use, based on the armor trims they find and equip in the world.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Ultimate Abilities</h3>
+                            <p>Players can perform in-game rituals to unlock even stronger "Ultimate" versions of their trim abilities.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Easy Configuration</h3>
+                            <p>Use the detailed config file to change every setting you want, from ability damage to cooldowns.</p>
+                        </div>
+                        <div class="card">
+                            <h3>Made for Teams</h3>
+                            <p>The built-in <code>/trust</code> system lets players team up without worrying about hitting friends with their powers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="padding: 100px 0;">
+                <div class="container">
+                    <h2>Explore The Plugin</h2>
+                    <p class="section-subtitle">Learn more about the features and how to get started.</p>
+                    
+                    <div class="card-grid">
+                        <a class="card-link" href="/docs#abilities">
+                            <div class="card">
+                                <h3>View All Abilities</h3>
+                                <p>See a complete list of every trim ability and what it does.</p>
+                            </div>
+                        </a>
+                        <a class="card-link" href="/docs#rituals">
+                            <div class="card">
+                                <h3>Learn About Rituals</h3>
+                                <p>Discover how to upgrade your armor to unlock powerful Ultimate Abilities.</p>
+                            </div>
+                        </a>
+                        <a class="card-link" href="/docs#config">
+                            <div class="card">
+                                <h3>Read the Config Guide</h3>
+                                <p>Get a full breakdown of the configuration options and commands.</p>
+                            </div>
+                        </a>
+                        <a class="card-link" href="#" id="community-card-link">
+                            <div class="card">
+                                <h3>Join the Community</h3>
+                                <p>Get support, ask questions, and share your ideas with other players.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Other sections would go here (abilities, rituals, config) -->
+        <!-- For brevity, I've omitted the detailed content of other sections -->
+        
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 PowerTrims. Made for the Minecraft Community.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('.pagelink');
+            const navbar = document.querySelector('.navbar');
+            const communityModal = document.getElementById('community-modal');
+            const downloadModal = document.getElementById('download-modal');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            
+            // Modal functionality
+            document.getElementById('community-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                communityModal.style.display = 'block';
+            });
+            
+            document.getElementById('community-card-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                communityModal.style.display = 'block';
+            });
+            
+            document.getElementById('download-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                downloadModal.style.display = 'block';
+            });
+            
+            document.getElementById('download-hero-link').addEventListener('click', (e) => {
+                e.preventDefault();
+                downloadModal.style.display = 'block';
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    communityModal.style.display = 'none';
+                    downloadModal.style.display = 'none';
+                });
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === communityModal) {
+                    communityModal.style.display = 'none';
+                }
+                if (e.target === downloadModal) {
+                    downloadModal.style.display = 'none';
+                }
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            function showPage(pageId) {
+                if (!pageId) {
+                    pageId = 'home';
+                }
+
+                pages.forEach(page => {
+                    page.classList.toggle('active', page.id === 'page-' + pageId);
+                });
+                
+                window.scrollTo(0, 0);
+            }
+
+            function handleRouteChange() {
+                const allowedPages = ['home', 'abilities', 'rituals', 'config'];
+                const trimPages = ['sentry', 'silence', 'vex', 'ward', 'wild', 'coast', 'dune', 'eye', 'host', 'raiser', 'rib', 'snout', 'spire', 'tide', 'wayfinder', 'flow', 'bolt'];
+                
+                let hash = window.location.hash.substring(1);
+                
+                if (hash.startsWith('trim-')) {
+                    const trimName = hash.substring(5);
+                    if (!trimPages.includes(trimName)) {
+                        hash = 'home';
+                    }
+                } else if (!allowedPages.includes(hash)) {
+                    hash = 'home';
+                }
+
+                showPage(hash);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const pageId = link.getAttribute('href').substring(1);
+                    window.location.hash = pageId;
+                });
+            });
+            
+            window.addEventListener('hashchange', handleRouteChange);
+            handleRouteChange(); // Initial page load
+        });
+    </script>
+</body>
+</html>
